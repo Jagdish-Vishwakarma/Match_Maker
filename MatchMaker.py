@@ -6,6 +6,7 @@ from sentence_transformers import SentenceTransformer, util
 # Load pre-trained model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+st.set_page_config(layout="wide")  # Set the layout to wide
 # Title
 st.title("Big Firms & Startups Matchmaking")
 
@@ -40,10 +41,10 @@ if big_firms_file and startups_file:
 
         # Display uploaded datasets
         st.subheader("Big Firms Dataset")
-        st.dataframe(big_firms)
+        st.dataframe(big_firms, use_container_width=True)
 
         st.subheader("Startups Dataset")
-        st.dataframe(startups)
+        st.dataframe(startups, use_container_width=True)
 
         # Prepare Text for Semantic Search
         big_firm_texts = (
@@ -81,7 +82,7 @@ if big_firms_file and startups_file:
 
         # Display sorted results
         st.subheader("Matchmaking Results (Sorted)")
-        st.dataframe(sorted_results)
+        st.dataframe(sorted_results, use_container_width=True)
 
     except Exception as e:
         st.error(f"An error occurred while processing the data: {e}")
