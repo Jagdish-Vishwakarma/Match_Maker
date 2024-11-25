@@ -39,13 +39,6 @@ if big_firms_file and startups_file:
             st.error(f"The selected number of top matches ({top_k}) exceeds the number of available startups ({len(startups)}). Please select a smaller number.")
             st.stop()
 
-        # Display uploaded datasets
-        st.subheader("Big Firms Dataset")
-        st.dataframe(big_firms, use_container_width=True)
-
-        st.subheader("Startups Dataset")
-        st.dataframe(startups, use_container_width=True)
-
         # Prepare Text for Semantic Search
         big_firm_texts = (
             big_firms['Technology'] + " " + big_firms['Research and Development Area']
@@ -80,9 +73,16 @@ if big_firms_file and startups_file:
         # Sort results by "Big Firm" and "Similarity Score"
         sorted_results = results_df.sort_values(by=["Big Firm", "Similarity Score"], ascending=[True, False])
 
-        # Display sorted results
-        st.subheader("Matchmaking Results (Sorted)")
+        # Display sorted results at the top
+        st.subheader("Matchmaking Results")
         st.dataframe(sorted_results, use_container_width=True)
+
+        # Display uploaded datasets
+        st.subheader("Big Firms Dataset")
+        st.dataframe(big_firms, use_container_width=True)
+
+        st.subheader("Startups Dataset")
+        st.dataframe(startups, use_container_width=True)
 
     except Exception as e:
         st.error(f"An error occurred while processing the data: {e}")
